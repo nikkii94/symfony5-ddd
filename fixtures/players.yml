@@ -1,0 +1,18 @@
+Guess\Domain\Player\Player:
+  user:
+    username: user
+    email: user@localhost
+    password: '\$2y\$13\$MMBL91.pHwThLyiWnx1T4eR/HdN4PCBfEf.LpFzRqAX5xh9j4tcHm' # test
+#    roles: [ ] # It will have the ROLE_USER that is automatically assigned to each user
+
+  player:
+    username: player
+    email: player@localhost
+    password: '\$2y\$13\$MMBL91.pHwThLyiWnx1T4eR/HdN4PCBfEf.LpFzRqAX5xh9j4tcHm' # test
+#    roles: [ROLE_READER]
+
+  admin:
+    username: admin
+    email: admin@localhost
+    password: '\$2y\$13\$MMBL91.pHwThLyiWnx1T4eR/HdN4PCBfEf.LpFzRqAX5xh9j4tcHm' # test
+#    roles: [ROLE_ADMIN] # This role inherits from all other rights

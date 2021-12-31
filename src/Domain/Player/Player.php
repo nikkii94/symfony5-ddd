@@ -5,8 +5,11 @@ namespace Guess\Domain\Player;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class Player
+class Player implements UserInterface, PasswordAuthenticatedUserInterface
 {
     private int $id;
     private string $username;
@@ -16,7 +19,7 @@ class Player
     private int $point;
     private int $avatar;
     private bool $isActive;
-    private ArrayCollection $guesses;
+    private Collection $guesses;
 
     public function __construct()
     {
@@ -169,5 +172,45 @@ class Player
     public function setGuesses(ArrayCollection $guesses): void
     {
         $this->guesses = $guesses;
+    }
+
+    /**
+     * The public representation of the user (e.g. a username, an email address, etc.)
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->username;
+    }
+
+
+    public function getRoles(): array
+    {
+//        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
