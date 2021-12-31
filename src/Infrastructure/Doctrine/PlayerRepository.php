@@ -18,8 +18,8 @@ class PlayerRepository extends ServiceEntityRepository implements PlayerReposito
 
     /**
      * @param Player $player
-     * @throws ORMException
      * @throws OptimisticLockException
+     * @throws ORMException
      */
     public function save(Player $player): void
     {
