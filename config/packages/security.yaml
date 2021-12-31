@@ -15,14 +15,14 @@ security:
             security: false
 
         login:
-            pattern: ^/api/login
+            pattern: ^/login
             stateless: true
             provider: users
             login_throttling:
                 max_attempts: 5
             json_login:
                 provider: users
-                check_path: /api/login_check
+                check_path: /login_check
                 username_path: username
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -49,7 +49,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/api/login, roles: PUBLIC_ACCESS }
+         - { path: ^/login, roles: PUBLIC_ACCESS }
          - { path: ^/api/players, roles: PUBLIC_ACCESS  }
          - { path: ^/api/games, roles: PUBLIC_ACCESS  }
          - { path: ^/api/top-players, roles: PUBLIC_ACCESS  }

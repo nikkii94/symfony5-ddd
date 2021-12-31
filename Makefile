@@ -31,13 +31,13 @@ cc:
 	docker exec -it guess /home/guess/bin/console cache:clear
 
 test-jwt:
-	curl -X POST -H "Content-Type: application/json" ${BASE_URL}${PORT}/api/login_check -d '{"username":"user","password":"test"}'
+	curl -X POST -H "Content-Type: application/json" ${BASE_URL}${PORT}/login_check -d '{"username":"user","password":"test"}'
 
 jwt-create-ok: ## Create a JWT for a valid test account (you can use the "lexik:jwt:generate-token" command now)
-	@curl -s POST -H "Content-Type: application/json" ${BASE_URL}${PORT}/api/login_check -d '{"username":"player","password":"test"}'
+	@curl -s POST -H "Content-Type: application/json" ${BASE_URL}${PORT}/login_check -d '{"username":"player","password":"test"}'
 
 jwt-create-nok: ## Login attempt with wrong credentials
-	@curl -s POST -H "Content-Type: application/json" ${BASE_URL}${PORT}/api/login_check -d '{"username":"foo","password":"bar"}'
+	@curl -s POST -H "Content-Type: application/json" ${BASE_URL}${PORT}/login_check -d '{"username":"foo","password":"bar"}'
 
 jwt-test: ## Test a JWT token to access an API Platform resource
 	@curl -s GET -H 'Cache-Control: no-cache' -H "Content-Type: application/json" -H "Authorization: Bearer ${BEARER}" ${BASE_URL}${PORT}/api/games/1
