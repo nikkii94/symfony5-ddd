@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Game;
+namespace Guess\Domain\Game;
 
 interface GameRepositoryInterface
 {
