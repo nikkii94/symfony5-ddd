@@ -15,3 +15,9 @@ schema-update:
 
 test-coverage:
 	docker exec -it guess /home/guess/vendor/bin/phpunit --coverage-html html tests
+
+load-fixtures:
+	docker exec -it guess /home/guess/bin/console doctrine:fixtures:load
+
+cc:
+	docker exec -it guess /home/guess/bin/console cache:clear
