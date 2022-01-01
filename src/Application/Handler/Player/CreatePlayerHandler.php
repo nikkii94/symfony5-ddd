@@ -1,6 +1,6 @@
 <?php
 
-namespace Guess\Application\Player;
+namespace Guess\Application\Handler\Player;
 
 use Exception;
 use Guess\Domain\Player\Player;
@@ -21,8 +21,7 @@ class CreatePlayerHandler
 
     /**
      * @param array $playerData
-     * @return Player
-     * @throws RuntimeException
+     * @return void
      */
     public function handle(array $playerData): void
     {

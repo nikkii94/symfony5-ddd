@@ -1,6 +1,6 @@
 <?php
 
-namespace Guess\Application\League;
+namespace Guess\Application\Handler\League;
 
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -8,6 +8,8 @@ use Exception;
 use Guess\Application\Services\FileUploaderInterface;
 use Guess\Domain\League\League;
 use Guess\Domain\League\LeagueRepositoryInterface;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 
@@ -15,8 +17,15 @@ class CreateLeagueHandler
 {
     private LeagueRepositoryInterface $leagueRepository;
     private FileUploaderInterface $logoUploader;
-    private $bucketName;
+    private string $bucketName;
 
+    /**
+     * @param LeagueRepositoryInterface $leagueRepository
+     * @param FileUploaderInterface     $logoUploader
+     * @param ContainerBagInterface     $containerBag
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function __construct(
         LeagueRepositoryInterface $leagueRepository,
         FileUploaderInterface $logoUploader,

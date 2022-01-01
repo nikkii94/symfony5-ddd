@@ -3,7 +3,7 @@
 namespace Guess\Infrastructure\Command;
 
 use Exception;
-use Guess\Application\League\CreateLeagueHandler;
+use Guess\Application\Handler\League\CreateLeagueHandler;
 use Guess\Infrastructure\Services\FetchLeaguesInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

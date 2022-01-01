@@ -6,33 +6,38 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
-use Guess\Domain\League\League;
-use Guess\Domain\League\LeagueRepositoryInterface;
+use Guess\Domain\Team\Team;
+use Guess\Domain\Team\TeamRepositoryInterface;
 
-class LeagueRepository extends ServiceEntityRepository implements LeagueRepositoryInterface
+class TeamRepository extends ServiceEntityRepository implements TeamRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, League::class);
+        parent::__construct($registry, Team::class);
     }
 
     public function all(): array
     {
         return $this
-            ->createQueryBuilder('l')
-            ->orderBy('l.id')
+            ->createQueryBuilder('t')
+            ->orderBy('t.id')
             ->getQuery()
             ->getArrayResult();
     }
 
+    public function deleteAll(): void
+    {
+        $this->createQueryBuilder('t')->delete();
+    }
+
     /**
-     * @param League $league
+     * @param Team $team
      * @throws OptimisticLockException
      * @throws ORMException
      */
-    public function save(League $league): void
+    public function save(Team $team): void
     {
-        $this->_em->persist($league);
+        $this->_em->persist($team);
         $this->_em->flush();
     }
 }

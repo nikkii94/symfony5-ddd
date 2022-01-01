@@ -6,11 +6,15 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Guess\Domain\Game\Game;
+use RuntimeException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class Player implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const RIGHT_GUESS_POINT = 1;
+
     private int $id;
     private string $username;
     private string $password;
@@ -212,5 +216,26 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function makeGuesses(Game $game, int $homeTeamGuess, int $awayTeamGuess): void
+    {
+        if ((new DateTimeImmutable()) > $game->getGameTime()) {
+            throw new RuntimeException('Starting time passed for this game, cant make guess');
+        }
+
+        $guess = new Guess();
+        $guess->setPlayer($this);
+        $guess->setGame($game);
+        $guess->setCreatedAt(new DateTimeImmutable());
+        $guess->setGuess($homeTeamGuess . '-' . $awayTeamGuess);
+
+        $this->guesses->add($guess);
+        $game->addGuess($guess);
+    }
+
+    public function pointUp(): void
+    {
+        $this->point += self::RIGHT_GUESS_POINT;
     }
 }

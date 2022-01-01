@@ -9,3 +9,18 @@ api_player_create:
     path: /api/players
     methods: POST
     controller: Guess\Controller\Player\PlayerController::index
+
+api_league_list:
+    path: /api/leagues
+    methods: GET
+    controller: Guess\Controller\League\LeagueController::list
+
+api_game_list:
+    path: /api/games
+    controller: Guess\Controller\Game\ListController::index
+    methods: GET
+
+api_player_guess:
+    path: /api/guesses
+    controller: Guess\Controller\Player\GuessController::index
+    methods: POST

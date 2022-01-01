@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Guess\Domain\League\League;
 use Guess\Domain\Player\Guess;
+use Guess\Domain\Player\Player;
 use Guess\Domain\Team\Team;
 use RuntimeException;
 
@@ -132,5 +133,10 @@ class Game
     public function addGuess(Guess $guess): void
     {
         $this->guesses->add($guess);
+    }
+
+    public function hasPlayerGuessed(?Player $player = null) : bool
+    {
+        return false;
     }
 }
