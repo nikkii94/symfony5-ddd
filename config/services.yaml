@@ -4,7 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    RAPIDAPI_HOST: '%env(resolve:RAPIDAPI_HOST)%'
+    RAPIDAPI_KEY: '%env(resolve:RAPIDAPI_KEY)%'
+    AWS_BUCKET_NAME: '%env(resolve:BUCKET_NAME)%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -20,6 +22,17 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    Guess\Controller\:
+        resource: '../src/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
+#    Guess\Infrastructure\RapidApi\RapidApiClient:
+#        arguments:
+#            $host: '%env(RAPIDAPI_HOST)%'
+#            $key: '%env(RAPIDAPI_KEY))%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

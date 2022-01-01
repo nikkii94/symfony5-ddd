@@ -3,7 +3,7 @@
 namespace Guess\Controller\Player;
 
 use Exception;
-use Guess\Application\CreatePlayerHandler;
+use Guess\Application\Player\CreatePlayerHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,5 +36,10 @@ class PlayerController extends AbstractController
         }
 
         return new JsonResponse('User created', Response::HTTP_OK);
+    }
+
+    public function list(): JsonResponse
+    {
+        return new JsonResponse();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Guess\Application;
+namespace Guess\Application\Player;
 
 use Exception;
 use Guess\Domain\Player\Player;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Guess\Command;
+namespace Guess\Infrastructure\Command;
 
 use Guess\Domain\Player\Player;
 use Symfony\Component\Console\Command\Command;
