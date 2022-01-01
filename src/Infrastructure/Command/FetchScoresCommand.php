@@ -14,17 +14,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 class FetchScoresCommand extends Command
 {
     protected static $defaultName = 'app:fetch-scores';
-    private FetchGamesInterface $fetchGames;
-    private GameOverHandler $gameOverHandler;
 
     public function __construct(
-        FetchGamesInterface $fetchGames,
-        GameOverHandler $gameOverHandler
-    )
-    {
-        $this->fetchGames = $fetchGames;
-        $this->gameOverHandler = $gameOverHandler;
-
+        private FetchGamesInterface $fetchGames,
+        private GameOverHandler $gameOverHandler
+    ) {
         parent::__construct();
     }
 

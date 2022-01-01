@@ -18,7 +18,7 @@ class RapidApiClient implements ProviderInterface
     public const API_FOOTBALL_URI_TEAMS = '/v2/teams/league/';
     public const API_FOOTBALL_URI_GAMES = '/v2/fixtures/date/';
 
-    private $host;
+    private string $host;
 
     private Client $client;
 

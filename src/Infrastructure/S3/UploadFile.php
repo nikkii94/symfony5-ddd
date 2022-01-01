@@ -8,18 +8,12 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class UploadFile implements FileUploaderInterface
 {
-
-    private S3Client $s3Client;
-    private string $s3Object;
-    private string $bucketName;
+    private string $s3Object = '';
+    private string $bucketName = '';
 
     public function __construct(
-        S3Client $s3Client
-    ) {
-        $this->s3Client = $s3Client;
-        $this->s3Object = "";
-        $this->bucketName = "";
-    }
+        private S3Client $s3Client
+    ) {}
 
     public function upload(string $bucketName, string $objectName, string $imageUrl): void
     {

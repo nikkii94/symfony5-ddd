@@ -13,17 +13,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 class FetchGamesCommand extends Command
 {
     protected static $defaultName = 'app:fetch-games';
-    private FetchGamesInterface $fetchGames;
-    private CreateGameHandler $createGameHandler;
 
     public function __construct(
-        FetchGamesInterface $fetchGames,
-        CreateGameHandler $createGameHandler
-    )
-    {
-        $this->fetchGames = $fetchGames;
-        $this->createGameHandler = $createGameHandler;
-
+        private FetchGamesInterface $fetchGames,
+        private CreateGameHandler $createGameHandler
+    ) {
         parent::__construct();
     }
 

@@ -7,12 +7,7 @@ use Guess\Domain\Game\GameRepositoryInterface;
 
 class GameRepository implements GameRepositoryInterface
 {
-    private array $games;
-
-    public function __construct()
-    {
-        $this->games = [];
-    }
+    private array $games = [];
 
     /**
      * @param int $id

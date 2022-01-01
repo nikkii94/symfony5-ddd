@@ -7,15 +7,11 @@ use Guess\Domain\Team\TeamRepositoryInterface;
 
 class TeamRepository implements TeamRepositoryInterface
 {
-    private array $teams;
-
-    public function __construct()
-    {
-        $this->teams = [];
-    }
+    private array $teams = [];
 
     public function findOneBy(array $criteria): ?Team
     {
+        /** @var Team $team */
         foreach ($this->teams as $team) {
             if ($team->getName() === $criteria['name']) {
                 return $team;
@@ -30,7 +26,7 @@ class TeamRepository implements TeamRepositoryInterface
         return $this->teams;
     }
 
-    public function save(Team $team)
+    public function save(Team $team): void
     {
         $this->teams[] = $team;
     }

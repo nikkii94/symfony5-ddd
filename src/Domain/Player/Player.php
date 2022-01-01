@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class Player implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    const RIGHT_GUESS_POINT = 1;
+    public const RIGHT_GUESS_POINT = 1;
 
     private int $id;
     private string $username;
@@ -215,7 +215,7 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+//         $this->plainPassword = null;
     }
 
     public function makeGuesses(Game $game, int $homeTeamGuess, int $awayTeamGuess): void

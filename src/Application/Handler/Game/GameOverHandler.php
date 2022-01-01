@@ -14,9 +14,7 @@ class GameOverHandler
     public function __construct(
         private GameRepositoryInterface $gameRepository,
         private TeamRepositoryInterface $teamRepository
-    )
-    {
-    }
+    ) {}
 
     /**
      * @param array $gameFromApi

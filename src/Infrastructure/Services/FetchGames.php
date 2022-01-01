@@ -4,14 +4,9 @@ namespace Guess\Infrastructure\Services;
 
 class FetchGames implements FetchGamesInterface
 {
-    private ProviderInterface $provider;
-
     public function __construct(
-        ProviderInterface $provider
-    )
-    {
-        $this->provider = $provider;
-    }
+        private ProviderInterface $provider
+    ) {}
 
     public function fetch(array $input = []): array
     {

@@ -7,14 +7,9 @@ use Guess\Domain\Player\PlayerRepositoryInterface;
 
 class PlayerRepository implements PlayerRepositoryInterface
 {
-    private array $players;
+    private array $players = [];
 
-    public function __construct()
-    {
-        $this->players = [];
-    }
-
-    public function save(Player $player)
+    public function save(Player $player): void
     {
         $this->players[] = $player;
     }
@@ -46,7 +41,7 @@ class PlayerRepository implements PlayerRepositoryInterface
         return null;
     }
 
-    public function update(Player $player)
+    public function update(Player $player): void
     {
 
     }

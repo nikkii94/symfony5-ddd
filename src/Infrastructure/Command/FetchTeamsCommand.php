@@ -6,8 +6,6 @@ use Exception;
 use Guess\Application\Handler\League\ListLeagueHandler;
 use Guess\Application\Handler\Team\CreateTeamHandler;
 use Guess\Domain\League\League;
-use Guess\Domain\Team\TeamRepositoryInterface;
-use Guess\Infrastructure\Doctrine\TeamRepository;
 use Guess\Infrastructure\Services\FetchTeamsInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,23 +14,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class FetchTeamsCommand extends Command
 {
     protected static $defaultName = 'app:fetch-teams';
-    private CreateTeamHandler $createTeamHandler;
-    private FetchTeamsInterface $fetcherService;
-    private ListLeagueHandler $listLeagueHandler;
-    private TeamRepository $teamRepository;
 
     public function __construct(
-        CreateTeamHandler $createGameHandler,
-        FetchTeamsInterface $fetcherService,
-        ListLeagueHandler $listLeagueHandler,
-        TeamRepository $teamRepository
-    )
-    {
-        $this->createTeamHandler = $createGameHandler;
-        $this->fetcherService = $fetcherService;
-        $this->listLeagueHandler = $listLeagueHandler;
-        $this->teamRepository = $teamRepository;
-
+        private CreateTeamHandler $createTeamHandler,
+        private FetchTeamsInterface $fetcherService,
+        private ListLeagueHandler $listLeagueHandler,
+    ) {
         parent::__construct();
     }
 

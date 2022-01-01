@@ -6,12 +6,8 @@ use Guess\Domain\League\LeagueRepositoryInterface;
 
 class ListLeagueHandler
 {
-    private LeagueRepositoryInterface $leagueRepository;
-
-    public function __construct(LeagueRepositoryInterface $leagueRepository)
-    {
-        $this->leagueRepository = $leagueRepository;
-    }
+    public function __construct(private LeagueRepositoryInterface $leagueRepository)
+    {}
 
     /**
      * @return array

@@ -5,17 +5,13 @@ namespace Guess\DataFixtures;
 use Doctrine\Persistence\ObjectManager;
 use Guess\Domain\League\League;
 use Guess\Domain\Player\Player;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures
 {
-//    private UserPasswordEncoderInterface $encoder;
-//
-//    public function __construct(UserPasswordEncoderInterface $encoder)
-//    {
-//        $this->encoder = $encoder;
-//    }
+    public function __construct(private UserPasswordHasherInterface $passwordHasher) {}
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $league = (new League())->setId(1);
         $league->setName('Premier League');
@@ -25,12 +21,12 @@ class AppFixtures
 
         $manager->persist($league);
 
-//        $player = new Player();
-//        $player->setUsername('fmo');
-//        $player->setEmail('test@Test.com');
-//        $player->setPassword($this->encoder->encodePassword($player, '123123'));
-//
-//        $manager->persist($player);
+        $player = new Player();
+        $player->setUsername('demo');
+        $player->setEmail('test@Test.com');
+        $player->setPassword($this->passwordHasher->hashPassword($player, '123123'));
+
+        $manager->persist($player);
 
         $manager->flush();
     }

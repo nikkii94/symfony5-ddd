@@ -5,6 +5,7 @@ namespace Guess\Controller\Game;
 use Exception;
 use Guess\Application\Handler\Game\ListGameHandler;
 use Guess\Domain\Game\Game;
+use Guess\Domain\Player\Player;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,9 +14,7 @@ class ListController extends AbstractController
 {
     public function __construct(
         private ListGameHandler $listGameHandler
-    )
-    {
-    }
+    ) {}
 
     /**
      * @param Request $request
@@ -31,6 +30,9 @@ class ListController extends AbstractController
 
         $allGames = [];
 
+        /** @var Player|null $player */
+        $player = $this->getUser();
+
         /** @var Game $game */
         foreach ($games as $game) {
             $allGames[] = [
@@ -42,7 +44,7 @@ class ListController extends AbstractController
                 'gameTime' => $game->getGameTime()->format('H:i'),
                 'score' => $game->getScore(),
                 'day' => $game->getGameTime()->format('l'),
-                'guess' => $game->hasPlayerGuessed($this->getUser() ?? null)
+                'guess' => $game->hasPlayerGuessed($player ?? null)
             ];
         }
 

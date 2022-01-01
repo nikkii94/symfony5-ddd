@@ -16,9 +16,7 @@ class CreateGameHandler
         private GameRepositoryInterface $gameRepository,
         private TeamRepositoryInterface $teamRepository,
         private LeagueRepositoryInterface $leagueRepository
-    )
-    {
-    }
+    ) {}
 
     /**
      * @param array $game

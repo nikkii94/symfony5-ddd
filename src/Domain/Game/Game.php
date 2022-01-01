@@ -137,6 +137,16 @@ class Game
 
     public function hasPlayerGuessed(?Player $player = null) : bool
     {
+        if (!$player instanceof Player) {
+            return false;
+        }
+
+        foreach ($this->guesses as $guess) {
+            if ($guess->getPlayer()->getId() === $player->getId()) {
+                return true;
+            }
+        }
+
         return false;
     }
 }

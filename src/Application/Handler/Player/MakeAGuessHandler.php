@@ -10,17 +10,10 @@ use RuntimeException;
 
 class MakeAGuessHandler
 {
-    private PlayerRepositoryInterface $playerRepository;
-    private GameRepositoryInterface $gameRepository;
-
     public function __construct(
-        PlayerRepositoryInterface $playerRepository,
-        GameRepositoryInterface $gameRepository
-    )
-    {
-        $this->playerRepository = $playerRepository;
-        $this->gameRepository = $gameRepository;
-    }
+        private PlayerRepositoryInterface $playerRepository,
+        private GameRepositoryInterface $gameRepository
+    ) {}
 
     /**
      * @param array $guessArray
@@ -28,6 +21,7 @@ class MakeAGuessHandler
      */
     public function handle(array $guessArray): void
     {
+        /** @var Player $player */
         $player = $this->playerRepository->findOneBy(
             ['username' => $guessArray['username']]
         );
@@ -40,7 +34,6 @@ class MakeAGuessHandler
 
         [$homeTeamGuess, $awayTeamGuess] = explode('-', $guessArray['guess']);
 
-        /** @var Player $player */
         $player->makeGuesses($game, $homeTeamGuess, $awayTeamGuess);
 
         $this->playerRepository->update(

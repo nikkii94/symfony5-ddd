@@ -13,18 +13,11 @@ class FetchLeaguesCommand extends Command
 {
     protected static $defaultName = 'app:fetch-leagues';
 
-    private CreateLeagueHandler $createLeagueHandler;
-    private FetchLeaguesInterface $fetchLeaguesService;
-
     public function __construct(
-        string $name = null,
-        CreateLeagueHandler $createLeagueHandler,
-        FetchLeaguesInterface $fetchLeaguesService
+        private CreateLeagueHandler $createLeagueHandler,
+        private FetchLeaguesInterface $fetchLeaguesService
     ) {
-        parent::__construct($name);
-
-        $this->createLeagueHandler = $createLeagueHandler;
-        $this->fetchLeaguesService = $fetchLeaguesService;
+        parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

@@ -11,16 +11,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class PasswordHashCommand extends Command
 {
-    // the name of the command (the part after "bin/console")
     protected static $defaultName = 'app:hash-password';
 
-    private $hasher;
-
-    public function __construct(string $name = null, UserPasswordHasherInterface $hasher)
+    public function __construct(private UserPasswordHasherInterface $hasher)
     {
-        parent::__construct($name);
-
-        $this->hasher = $hasher;
+        parent::__construct();
     }
 
     protected function configure(): void
@@ -42,19 +37,6 @@ class PasswordHashCommand extends Command
             $input->getArgument('password')
         ));
 
-        // this method must return an integer number with the "exit status code"
-        // of the command. You can also use these constants to make code more readable
-
-        // return this if there was no problem running the command
-        // (it's equivalent to returning int(0))
         return Command::SUCCESS;
-
-        // or return this if some error happened during the execution
-        // (it's equivalent to returning int(1))
-        // return Command::FAILURE;
-
-        // or return this to indicate incorrect command usage; e.g. invalid options
-        // or missing arguments (it's equivalent to returning int(2))
-        // return Command::INVALID
     }
 }

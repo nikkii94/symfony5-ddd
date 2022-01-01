@@ -10,14 +10,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class CreatePlayerHandler
 {
-    private PlayerRepositoryInterface $playerRepository;
-    private UserPasswordHasherInterface $hasher;
-
-    public function __construct(PlayerRepositoryInterface $playerRepository, UserPasswordHasherInterface $hasher)
-    {
-        $this->playerRepository = $playerRepository;
-        $this->hasher = $hasher;
-    }
+    public function __construct(
+        private PlayerRepositoryInterface $playerRepository,
+        private UserPasswordHasherInterface $hasher)
+    {}
 
     /**
      * @param array $playerData

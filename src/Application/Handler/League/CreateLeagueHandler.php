@@ -15,8 +15,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 
 class CreateLeagueHandler
 {
-    private LeagueRepositoryInterface $leagueRepository;
-    private FileUploaderInterface $logoUploader;
     private string $bucketName;
 
     /**
@@ -27,12 +25,10 @@ class CreateLeagueHandler
      * @throws NotFoundExceptionInterface
      */
     public function __construct(
-        LeagueRepositoryInterface $leagueRepository,
-        FileUploaderInterface $logoUploader,
+        private LeagueRepositoryInterface $leagueRepository,
+        private FileUploaderInterface $logoUploader,
         ContainerBagInterface $containerBag
     ) {
-        $this->logoUploader = $logoUploader;
-        $this->leagueRepository = $leagueRepository;
         $this->bucketName = $containerBag->get('AWS_BUCKET_NAME');
     }
 

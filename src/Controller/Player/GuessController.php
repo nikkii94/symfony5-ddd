@@ -11,12 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GuessController extends AbstractController
 {
-    private MakeAGuessHandler $guessHandler;
-
-    public function __construct(MakeAGuessHandler $guessHandler)
-    {
-        $this->guessHandler = $guessHandler;
-    }
+    public function __construct(private MakeAGuessHandler $guessHandler) {}
 
     /**
      * @param Request $request

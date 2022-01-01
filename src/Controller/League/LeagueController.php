@@ -10,14 +10,6 @@ class LeagueController extends AbstractController
 {
     public function list(LeagueRepositoryInterface $leagueRepository): JsonResponse
     {
-//        $leagues = $leagueRepository->findAll();
-//
-//        $return = [];
-//        foreach ($leagues as $league) {
-//            $return[] = $league->toArray();
-//        }
-//
-//        dd($return);
         return new JsonResponse($leagueRepository->all());
     }
 }

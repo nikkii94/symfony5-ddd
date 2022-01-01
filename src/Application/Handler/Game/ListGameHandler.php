@@ -17,8 +17,7 @@ class ListGameHandler
     public function __construct(
         private GameRepositoryInterface $gameRepository,
         private LeagueRepositoryInterface $leagueRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @param string $week

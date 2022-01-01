@@ -7,12 +7,7 @@ use Guess\Domain\League\LeagueRepositoryInterface;
 
 class LeagueRepository implements LeagueRepositoryInterface
 {
-    private array $leagues;
-
-    public function __construct()
-    {
-        $this->leagues = [];
-    }
+    private array $leagues = [];
 
     /**
      * @param int $id

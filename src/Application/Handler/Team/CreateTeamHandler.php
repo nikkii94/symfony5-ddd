@@ -13,8 +13,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 
 class CreateTeamHandler
 {
-    private TeamRepositoryInterface $teamRepository;
-    private FileUploaderInterface $logoUploader;
     private string $bucketName;
 
     /**
@@ -25,12 +23,10 @@ class CreateTeamHandler
      * @throws NotFoundExceptionInterface
      */
     public function __construct(
-        TeamRepositoryInterface $teamRepository,
-        FileUploaderInterface $logoUploader,
+        private TeamRepositoryInterface $teamRepository,
+        private FileUploaderInterface $logoUploader,
         ContainerBagInterface $containerBag
     ) {
-        $this->teamRepository = $teamRepository;
-        $this->logoUploader = $logoUploader;
         $this->bucketName = $containerBag->get('AWS_BUCKET_NAME');
     }
 
@@ -44,13 +40,9 @@ class CreateTeamHandler
             return;
         }
 
-        $team = $this->teamRepository->findOneBy(
-            [
-                'name' => $team['name']
-            ]
-        );
+        $existing = $this->teamRepository->findOneBy(['name' => $team['name']]);
 
-        if ($team instanceof Team) {
+        if ($existing instanceof Team) {
             throw new RuntimeException('Team already saved');
         }
 
